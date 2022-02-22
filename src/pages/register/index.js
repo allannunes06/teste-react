@@ -10,7 +10,6 @@ import {
     Container,
     ContainerItens,
     Label,
-    Input,
     Title,
     ErrorMessage
 } from './styles'
@@ -75,26 +74,13 @@ function Register() {
         <Container>
             <ContainerItens>
                 <Title>Register</Title>
-                <form noValidate onSubmit={handleSubmit(onSubmit)}>
-                    <Label>Name</Label>
-                    <Input name='name' type="text" placeholder='Name'
-                    />
-                    <ErrorMessage>{errors.name?.message}</ErrorMessage>
-                    <Label>Birth Date</Label>
-                    <Input name='birthDate' type="date" placeholder='99/99/9999'
-                        {...register('birthDate')}
-                        error={errors.birthDate?.message} />
-                    <ErrorMessage>{errors.birthDate?.message}</ErrorMessage>
-                    <Label>CPF</Label>
-                    <Input name='cpf' type="text" placeholder='999.999.999.-99'
-                        {...register('cpf')}
-                        error={errors.cpf?.message} />
-                    <ErrorMessage>{errors.cpf?.message}</ErrorMessage>
-                </form>
                 <Formik
                         onSubmit={onSubmit}
                         validateOnMount
                         initialValues={{
+                        name:'',
+                        birthDate:'',
+                        cpf:'',
                         cep: '',
                         logradouro: '',
                         numero: '',
@@ -105,6 +91,19 @@ function Register() {
                     }}
                     render={({ isValid, setFieldValue }) => (
                         <Form>
+                <form noValidate onSubmit={handleSubmit(onSubmit)}>
+                    <Label>Name</Label>
+                    <Field className="label" name='name' type="text" placeholder='Name'
+                    />
+                    <ErrorMessage>{errors.name?.message}</ErrorMessage>
+                    <Label>Birth Date</Label>
+                    <Field className="label" name='birthDate' type="date" placeholder='99/99/9999' />
+                    <ErrorMessage>{errors.birthDate?.message}</ErrorMessage>
+                    <Label>CPF</Label>
+                    <Field className="label" name='cpf' type="text" placeholder='999.999.999.-99'/>
+                    <ErrorMessage>{errors.cpf?.message}</ErrorMessage>
+                </form>
+
                             <Label>CEP</Label>
                             <Field className="label" name="cep" type="text" placeholder='99999-999' onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
                             <Label>Logradouro</Label>
